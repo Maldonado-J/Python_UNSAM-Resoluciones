@@ -43,7 +43,9 @@ while saldo > 0:
         total_pagado += a_favor #resto lo que pago de mas
 
 #----------------Ejercicio 1.10: tabla ------------------
-    print(mes, round(total_pagado, 2), round(saldo, 2))
+    #print(mes, round(total_pagado, 2), round(saldo, 2))
+#----------------Ejercicio 1.20: f-strings ------------------
+    print(f'\t{str(mes):>4s} |\t${total_pagado:0.2f}\t|\t${saldo:0.2f}')
     
     if mes >= pago_extra_mes_comienzo and mes <= pago_extra_mes_fin :
         saldo -=adelanto
