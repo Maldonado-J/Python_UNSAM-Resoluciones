@@ -8,8 +8,24 @@ tasa = 0.05
 pago_mensual = 2684.11
 total_pagado = 0.0
 
+# while saldo > 0:
+#     saldo = saldo * (1+tasa/12) - pago_mensual
+#     total_pagado = total_pagado + pago_mensual
+
+# print('Total pagado', round(total_pagado, 2))
+
+
+#------------Ejercicio 1.8: hipoteca.py v2 - --------------
+#Supongamos que David adelanta pagos extra de $1000/mes durante los primeros 12 meses de la hipoteca.
+adelanto = 1000
+mes = 0
+
 while saldo > 0:
     saldo = saldo * (1+tasa/12) - pago_mensual
-    total_pagado = total_pagado + pago_mensual
+    total_pagado += pago_mensual
+    if mes < 12 :
+        saldo -=adelanto
+        total_pagado += adelanto
+    mes += 1
 
-print('Total pagado', round(total_pagado, 2))
+print('Total pagado en', mes, 'meses:', round(total_pagado, 2))
