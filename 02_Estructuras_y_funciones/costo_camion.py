@@ -43,6 +43,27 @@ def costo_camion(nombre_archivo):
                 sin_precio.append(row[0])
         return costo_total, con_precio, sin_precio
 
-costo, con_precio, sin_precio = costo_camion('../Data/missing.csv') #47671.15
+costo, con_precio, sin_precio = costo_camion('../Data/missing.csv')
 print(f'Costo total de {con_precio}: {costo:.2f}\nFaltan los precios de {sin_precio}')
-# %%
+
+#%% 2.9 csv costo_camion(nombre_archivo)
+import csv
+
+def costo_camion(nombre_archivo):
+    sin_precio = []
+    con_precio = []
+    costo_total = 0
+    with open(nombre_archivo, 'rt') as f:
+        lines = csv.reader(f)
+        headers = next(lines)
+        for row in lines:
+            try:
+                costo = float(row[1]) * float(row [2])
+                costo_total += costo
+                con_precio.append(row[0])
+            except ValueError:
+                sin_precio.append(row[0])
+        return costo_total, con_precio, sin_precio
+
+costo, con_precio, sin_precio = costo_camion('../Data/missing.csv')
+print(f'Costo total de {con_precio}: {costo:.2f}\nFaltan los precios de {sin_precio}')
