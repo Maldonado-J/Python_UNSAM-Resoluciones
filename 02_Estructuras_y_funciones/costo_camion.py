@@ -11,12 +11,16 @@ for line in f:
 print('Costo total:', round(costo_total,2))
 f.close()
 
-#%% 2.3 precio de la naranja
-with open('../Data/precios.csv', 'rt') as f:
-    headers = next(f) #nombre,cajones,precio
-    for line in f:
-        row = line.strip('\n').split(',')
-        if row[0].lower() == 'naranja':
-            precio_u = float(row[1])
-            print(f'[{row[0]:^12s}]: {precio_u:.2f}')
-# %%
+#%% 2.6 costo_camion.py > costo_camion(nombre_archivo)
+def costo_camion(nombre_archivo):
+    with open(nombre_archivo, 'rt') as f:
+        headers = next(f)
+        costo_total = 0
+        for line in f:
+            row = line.strip('\n').split(',')
+            costo = float(row[1]) * float(row [2])
+            costo_total += costo
+        return costo_total
+
+costo = costo_camion('../Data/camion.csv') #47671.15
+print(f'Costo total: {costo:.2f}')
