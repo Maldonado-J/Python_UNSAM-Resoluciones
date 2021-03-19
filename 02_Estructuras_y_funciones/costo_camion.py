@@ -1,5 +1,6 @@
 # %% 2.2 costo_camion.py
 #Calcular el precio pagado por los cajones cargados en el camión
+"""
 f = open('../Data/camion.csv', 'rt')
 headers = next(f) #nombre,cajones,precio
 costo_total = 0
@@ -10,6 +11,7 @@ for line in f:
     costo_total += costo
 print('Costo total:', round(costo_total,2))
 f.close()
+"""
 
 #%% 2.6 costo_camion.py > costo_camion(nombre_archivo)
 """
@@ -27,6 +29,7 @@ costo = costo_camion('../Data/camion.csv') #47671.15
 print(f'Costo total: {costo:.2f}')
 """
 #%% 2.8 missing costo_camion(nombre_archivo)
+"""
 def costo_camion(nombre_archivo):
     sin_precio = []
     con_precio = []
@@ -45,7 +48,7 @@ def costo_camion(nombre_archivo):
 
 costo, con_precio, sin_precio = costo_camion('../Data/missing.csv')
 print(f'Costo total de {con_precio}: {costo:.2f}\nFaltan los precios de {sin_precio}')
-
+"""
 #%% 2.9 csv costo_camion(nombre_archivo)
 import csv
 
@@ -67,3 +70,5 @@ def costo_camion(nombre_archivo):
 
 costo, con_precio, sin_precio = costo_camion('../Data/missing.csv')
 print(f'Costo total de {con_precio}: {costo:.2f}\nFaltan los precios de {sin_precio}')
+#Costo total de ['Lima', 'Naranja', 'Caqui', 'Durazno', 'Mandarina']: 30381.15
+#Faltan los precios de ['Mandarina', 'Naranja']
