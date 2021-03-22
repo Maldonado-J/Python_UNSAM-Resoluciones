@@ -26,7 +26,10 @@ def leer_camion(nombre_archivo):
         for row in lines:
             datos = {}
             for i in range(len(header)):
-                datos[header[i]] = row[i]
+                try:
+                    datos[header[i]] = float(row[i]) #evaluo si puedo pasarlo a float
+                except ValueError:
+                    datos[header[i]] = row[i] #si no es tipo numerico, no hago conversion
             camion.append(datos)
     return camion
 
@@ -38,7 +41,6 @@ def leer_precios(nombre_archivo):
     precios = {}
     with open(nombre_archivo, 'rt', encoding='UTF-8') as f:
         lines = csv.reader(f)
-        next(lines)
         for row in lines:
             try:
                 precios[row[0]] = round(float(row[1]), 2)
@@ -48,34 +50,16 @@ def leer_precios(nombre_archivo):
 
 precios = leer_precios('../Data/precios.csv')
 #%% 2.18 balance
-"""
-#2.16 camion = leer_camion(camion.csv)
-#precios pagados al productor de frutas
-precio_productor = 0
-for fov in camion:
-    precio_productor += int(fov['cajones']) * float(fov['precio'])
-
-#2.17 precios = leer_precios(precios.csv)
-#precios de venta
-precio_venta = 0
-for fov in precios.keys():
-    precio_venta += precios[fov]
-
-print(f'Total pagado al productor de frutas: ${precio_productor:.2f}\nTotal ganado en ventas: ${precio_venta:.2f}')
-balance = precio_venta-precio_productor
-if balance < 0:
-    print(f'Hubo una perdida de: {balance:.2f}')
-else:
-    print(f'Hubo una ganacia de: ${balance:.2f}')
-"""
-# %%
 def balance(camion, precios):
     precio_productor = 0
     precio_venta = 0
-    for fov in camion:
-        precio_productor += int(fov['cajones']) * float(fov['precio'])
-    for fov in precios.keys():
-        precio_venta += precios[fov]
+    cant_cajon = {}
+    for fov in camion: #por cada item en camion [{fov1}, {fov2},...]
+        precio_productor += fov['cajones'] * fov['precio']
+        cant_cajon[fov['nombre']] = cant_cajon.get(fov['nombre'],0) + int(fov['cajones'])
+        #inicializo cant_cajon[key] en 0 si no existe la key, y sino las voy sumando (int)
+    for fov in cant_cajon.keys(): 
+        precio_venta += precios[fov] * cant_cajon[fov]
     balance = precio_venta - precio_productor
     return precio_productor, precio_venta, balance
 
@@ -87,7 +71,6 @@ else:
     print(f'Hubo una ganacia de: ${balance:.2f}')
 
 #Total pagado al productor de frutas: $47671.15
-#Total ganado en ventas: $1318.02
-#Hubo una perdida de: -46353.13
-
+#Total ganado en ventas: $62986.10
+#Hubo una ganacia de: $15314.95
 # %%
