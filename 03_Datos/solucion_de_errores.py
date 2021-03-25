@@ -72,12 +72,41 @@ print(tiene_uno(1984))
 
 #%% 3.4 Alcances
 
-#Error:                              #Solucion: 
-""" codigo con error
-"""
+#Error:                                     #Solucion:
+# falta devolver la funcion a main     ->     agrego return c
+
+def suma(a,b):
+    c = a + b
+    return c
+
+a = 2
+b = 3
+c = suma(a,b)
+print(f"La suma da {a} + {b} = {c}")
 
 #%% 3.5 Pisando memoria
 
-#Error:                              #Solucion: 
-""" codigo con error
-"""
+#Error:                                 
+    # guardo el mismo reg en camion porque nunca se sobreescribe 
+#Solucion:
+    # cambio de lugar registro asi se actualiza
+
+import csv
+from pprint import pprint
+
+def leer_camion(nombre_archivo):
+    camion=[]
+    with open(nombre_archivo,"rt") as f:
+        filas = csv.reader(f)
+        encabezado = next(filas)
+        for fila in filas:
+            registro={}
+            registro[encabezado[0]] = fila[0]
+            registro[encabezado[1]] = int(fila[1])
+            registro[encabezado[2]] = float(fila[2])
+            camion.append(registro)
+    return camion
+
+camion = leer_camion('../Data/camion.csv')
+pprint(camion)
+# %%
