@@ -68,3 +68,25 @@ print('\n---------- ---------- ---------- ----------')
 for nombre, cajones, precio, cambio in informe:
     precio = '$' + str(precio)
     print(f'{nombre:>10s} {cajones:>10.0f} {precio:>10s} {cambio:>10.2f}')
+
+#%% apto para no hardcodear los dash y dependa de #headers
+headers = ('Nombre', 'Cajones', 'Precio', 'Cambio')
+dashline = '----------'
+
+def encabezado(dash=False):
+    for i in headers[:-1]:
+        if dash:
+            print(f'{dashline:>10s}', end=' ')
+        else:
+            print(f'{i:>10s}', end=' ')
+    if dash:
+        print(f'{dashline:>10s}')
+    else:
+        print(f'{headers[-1]:>10s}')
+
+encabezado()
+encabezado(dash=True)
+for nombre, cajones, precio, cambio in informe:
+    precio = '$' + str(precio)
+    print(f'{nombre:>10s} {cajones:>10.0f} {precio:>10s} {cambio:>10.2f}')
+# %%
