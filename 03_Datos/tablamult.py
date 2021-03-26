@@ -20,11 +20,3 @@ for i in range(rango):
         print(f'{i+acumulador:>3d}', end=' ')
         acumulador += i
     print('\n')
-
-
-# %% solucion anterior
-# ventaja: menos lineas de codigo
-# desventaja: mas hardcodeado, menos flexible
-
-for fila in range(10):
-    print(f'{fila:1d}:    0 {fila:3d} {fila+2:>3d} {fila+3:>3d} ...')
