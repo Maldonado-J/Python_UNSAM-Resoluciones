@@ -37,13 +37,11 @@ precios = leer_precios('../Data/precios.csv')
 def balance(camion, precios):
     precio_productor = 0
     precio_venta = 0
-    cant_cajones = {}
     for fov in camion: #por cada dict de fruta o verdura en camion [{fov1}, {fov2},...]
-        precio_productor += fov['cajones'] * fov['precio']
-        cant_cajones[fov['nombre']] = cant_cajones.get(fov['nombre'],0) + int(fov['cajones'])
-        #inicializo cant_cajon[key] en 0 si no existe la key, y sino las voy sumando (int)
-    for fov in cant_cajones.keys(): 
-        precio_venta += precios[fov] * cant_cajones[fov]
+        nombre = fov['nombre']
+        cant_cajon = fov['cajones']
+        precio_productor += cant_cajon * fov['precio']
+        precio_venta += precios[nombre] * cant_cajon
     balance = precio_venta - precio_productor
     return precio_productor, precio_venta, balance
 
