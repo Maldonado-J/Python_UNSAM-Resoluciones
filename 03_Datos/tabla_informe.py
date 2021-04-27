@@ -32,7 +32,7 @@ def leer_precios(nombre_archivo):
 
 precios = leer_precios('../Data/precios.csv')
 
-#%% 3.13 recolectar datos
+#3.13 recolectar datos
 def hacer_informe(camion, precios):
     informe = []
     cant_cajon = Counter()
